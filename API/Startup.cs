@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,13 @@ namespace API
         {
             services.AddControllers();
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+            //lifetimes:
+            //scoped = alive for the lifetime of the request
+            //transient = only for the life of the method, very short life
+            //singleton = never destroyed until application is shut down
+            //AddScope(repository to be injected, instance of the concrete class)
+            //This allows the ProductRepository to be injectable
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
