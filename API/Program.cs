@@ -16,6 +16,7 @@ namespace API
         {
             var host = CreateHostBuilder(args).Build();
             //using will dispose immediately once the item is done
+            //added in 3_27
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;

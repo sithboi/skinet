@@ -36,5 +36,19 @@ namespace API.Controllers
         {
             return await _repo.GetProductByIdAsync(id);
         }
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+        {
+            //Quirk of ASP.Core doesn't allow an IReadOnlyList
+            return Ok(await _repo.GetProductBrandsAsync());
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
+            //Quirk of ASP.Core doesn't allow an IReadOnlyList
+            return Ok(await _repo.GetProductTypesAsync());
+        }        
     }
 }
